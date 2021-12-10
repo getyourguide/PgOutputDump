@@ -12,8 +12,8 @@ java -jar target/PgOutputDump-jar-with-dependencies.jar \
   --user=master \
   --password=my_password \
   --slot=my_slot \
-   --publication=a_replication \
-   -c 10
+  --publication=a_replication \
+  -c 10
 ```
 
 This tool will not create nor the slot nor the replication, they need to exist 
