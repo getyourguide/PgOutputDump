@@ -15,7 +15,9 @@ public class PgOutputDecoder {
 
     private static final LocalDateTime PG_EPOCH = LocalDateTime.of(2000, 1, 1, 0, 0, 0);
     Map<Integer, Table> mapOfTables = new HashMap<>();
+    private String previousType = "";
 
+    // https://www.postgresql.org/docs/16/protocol-logicalrep-message-formats.html
     public void decodeMessage(ByteBuffer msg) {
         var byteOne = msg.get();
 
@@ -90,7 +92,6 @@ public class PgOutputDecoder {
 
                     // TupleData
                     PgOutputUtil.readTupleData(msg);
-
                     break;
                 }
             case "I":
@@ -150,10 +151,34 @@ public class PgOutputDecoder {
 
                     break;
                 }
+            case "M":
+                {
+                    if (previousType.equals("S")) {
+                        msg.getInt(); // TransactionId
+                    }
+                    var trx = msg.get(); // Transactional flag
+                    var lsn = msg.getLong(); // The LSN of the logical decoding message.
+
+                    var prefix = PgOutputUtil.readString(msg);
+                    var size = msg.getInt();
+                    // we assume payload is a string
+                    StringBuilder sb = new StringBuilder();
+                    byte b;
+                    for (int i = 0; i < size; i++) {
+                        b = msg.get();
+                        sb.append((char) b);
+                    }
+                    var message = sb.toString();
+                    System.out.printf(
+                            "[LSN: %s] [Trx: %s] Prefix: %s, Message (size: %s): %s\n",
+                            lsn, trx, prefix, size, message);
+                    break;
+                }
             default:
                 {
                     System.out.printf("Type %s not implemented", type);
                 }
+                previousType = type;
         }
     }
 }

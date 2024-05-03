@@ -88,8 +88,9 @@ public class App implements Callable<Integer> {
                         .replicationStream()
                         .logical()
                         .withSlotName(slot)
-                        .withSlotOption("proto_version", 1)
+                        .withSlotOption("proto_version", 4)
                         .withSlotOption("publication_names", publication)
+                        .withSlotOption("messages", "true")
                         .start();
 
         Runtime.getRuntime().addShutdownHook(new Thread(this::close) {});
