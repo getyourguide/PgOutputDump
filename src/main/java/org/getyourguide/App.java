@@ -17,22 +17,49 @@ public class App implements Callable<Integer> {
 
     @Option(names = "--ssl", description = "Use secured connection")
     boolean useSsl;
-    @Option(names = {"-h", "--host"}, description = "The database hostname", required = true)
+
+    @Option(
+            names = {"-h", "--host"},
+            description = "The database hostname",
+            required = true)
     private String host;
-    @Option(names = {"-d", "--database"}, description = "The database to connect to", required = true)
+
+    @Option(
+            names = {"-d", "--database"},
+            description = "The database to connect to",
+            required = true)
     private String dbName;
-    @Option(names = {"-U", "--user"}, description = "The user login", required = true)
+
+    @Option(
+            names = {"-U", "--user"},
+            description = "The user login",
+            required = true)
     private String userName;
-    @Option(names = {"-P", "--password"}, description = "The user password", required = true)
+
+    @Option(
+            names = {"-P", "--password"},
+            description = "The user password",
+            required = true)
     private String password;
-    @Option(names = {"-s", "--slot"}, description = "The name of the slot, must already exist", required = true)
+
+    @Option(
+            names = {"-s", "--slot"},
+            description = "The name of the slot, must already exist",
+            required = true)
     private String slot;
-    @Option(names = {"-p",
-        "--publication"}, description = "The name of the publication, must already exist", required = true)
+
+    @Option(
+            names = {"-p", "--publication"},
+            description = "The name of the publication, must already exist",
+            required = true)
     private String publication;
-    @Option(names = {"-c",
-        "--count"}, description = "Exit application after reading this number of messages", required = false)
+
+    @Option(
+            names = {"-c", "--count"},
+            description = "Exit application after reading this number of messages",
+            required = false)
     private Integer maxCount;
+
     private PGReplicationStream stream;
     private Connection conn;
 
@@ -56,13 +83,14 @@ public class App implements Callable<Integer> {
         PGConnection replConnection = conn.unwrap(PGConnection.class);
 
         stream =
-            replConnection.getReplicationAPI()
-                .replicationStream()
-                .logical()
-                .withSlotName(slot)
-                .withSlotOption("proto_version", 1)
-                .withSlotOption("publication_names", publication)
-                .start();
+                replConnection
+                        .getReplicationAPI()
+                        .replicationStream()
+                        .logical()
+                        .withSlotName(slot)
+                        .withSlotOption("proto_version", 1)
+                        .withSlotOption("publication_names", publication)
+                        .start();
 
         Runtime.getRuntime().addShutdownHook(new Thread(this::close) {});
 
@@ -86,7 +114,6 @@ public class App implements Callable<Integer> {
             if (maxCount != null && msgCount == maxCount) {
                 break;
             }
-
         }
         close();
         return 0;

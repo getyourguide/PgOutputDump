@@ -16,22 +16,21 @@ public class Column {
     @Override
     public String toString() {
         return "["
-            + "Name:"
-            + " "
-            + this.name
-            + ", "
-            + "Key:"
-            + " "
-            + this.isKey
-            + ", "
-            + "Type:"
-            + " "
-            + this.type
-            + " "
-            + "("
-            + Oid.toString(type)
-            + ")"
-            + "]";
+                + "Name:"
+                + " "
+                + this.name
+                + ", "
+                + "Key:"
+                + " "
+                + this.isKey
+                + ", "
+                + "Type:"
+                + " "
+                + this.type
+                + " "
+                + "("
+                + Oid.toString(type)
+                + ")"
+                + "]";
     }
-
 }

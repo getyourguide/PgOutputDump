@@ -35,10 +35,8 @@ public class PgOutputUtil {
                 content = "TOASTED";
             }
 
-            System.out.printf("Column %s, content type %s, content %s%n",
-                n,
-                tupleContentType,
-                content);
+            System.out.printf(
+                    "Column %s, content type %s, content %s%n", n, tupleContentType, content);
         }
     }
 }
