@@ -6,7 +6,7 @@
 
   <groupId>com.getyourguide</groupId>
   <artifactId>PgOutputDump</artifactId>
-  <version>0.1</version>
+  <version>0.2</version>
   <packaging>jar</packaging>
 
   <properties>
@@ -81,7 +81,26 @@
             </googleJavaFormat>
           </java>
         </configuration>
-      </plugin> 
+      </plugin>
+
+      <plugin>
+        <groupId>com.github.os72</groupId>
+        <artifactId>protoc-jar-maven-plugin</artifactId>
+        <version>3.11.4</version>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <optimizeCodegen>false</optimizeCodegen>
+              <protocVersion>3.23.0</protocVersion>
+              <includeStdTypes>true</includeStdTypes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
 
     </plugins>
   </build>
