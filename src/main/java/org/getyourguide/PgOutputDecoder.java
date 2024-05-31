@@ -176,7 +176,8 @@ public class PgOutputDecoder {
                 }
             default:
                 {
-                    System.out.printf("Type %s not implemented", type);
+                    System.out.printf("Type %s not implemented\n", type);
+                    System.out.printf("Message: %s\n", new String(msg.array()));
                 }
                 previousType = type;
         }
