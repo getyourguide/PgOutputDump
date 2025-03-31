@@ -1,0 +1,9 @@
+/Users/alex/tmp5/repos/PgOutputDump/src/main/java/org/getyourguide/App.java
+/Users/alex/tmp5/repos/PgOutputDump/src/main/java/org/getyourguide/PgOutputDecoder.java
+/Users/alex/tmp5/repos/PgOutputDump/src/main/java/org/getyourguide/models/Column.java
+/Users/alex/tmp5/repos/PgOutputDump/src/main/java/org/getyourguide/models/Lsn.java
+/Users/alex/tmp5/repos/PgOutputDump/src/main/java/org/getyourguide/models/Table.java
+/Users/alex/tmp5/repos/PgOutputDump/src/main/java/org/getyourguide/source/FileStreamSource.java
+/Users/alex/tmp5/repos/PgOutputDump/src/main/java/org/getyourguide/source/PgReplicationSource.java
+/Users/alex/tmp5/repos/PgOutputDump/src/main/java/org/getyourguide/source/Source.java
+/Users/alex/tmp5/repos/PgOutputDump/src/main/java/org/getyourguide/utils/PgOutputUtil.java
